@@ -11,6 +11,10 @@ def home(request):
     posts = Posts.objects.filter(userPost=request.user)
     return render(request,'home.html',{'user':request.user,'posts':posts})
 
+def posts(request,pk):
+    posts = Posts.objects.get(id=pk)
+    return render(request,'posts.html',{'posts':posts})
+
 # def post_create(request):
 #     if request.method == 'POST':
 #         post_form = PostForm(request.POST)

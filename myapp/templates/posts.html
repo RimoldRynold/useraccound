@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="header">
+    <h2>{{user}}'s posts</h2>
+  </div>
+<div class="row">
+    <div class="leftcolumn">
+ 
+      <div class="card">
+      
+          <h2>{{posts.title}}</h2>
+          <h5>{{posts.created_at}}</h5>
+          <p style="line-height: 1.6;">{{posts.body|linebreaks}}</p>
+      
+      </div>
+
+    </div>
+  </div>
+
+{% endblock %}
