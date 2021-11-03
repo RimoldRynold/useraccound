@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+
+{% if user.is_authenticated %}
+              <!-- message -->
+              {% if messages %}
+              {% for message in messages %}
+              <p style="background-color: grey;
+              color: #fff;
+              padding: 10px;
+              margin-top: 10px;">{{message}} <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+          {% endfor %}	
+          {% endif %}
+  
+  
+          <!-- message ends -->
+          <div class="header">
+            <h2>{{user}}'s posts</h2>
+          </div>
+
+{% if posts %}
+<div class="row">
+    <div class="leftcolumn">
+      {% for post in posts reversed %}
+      <div class="card">
+        <a style="text-decoration: none; color: black;" href="/posts/{{post.id}}">
+          <h2>{{post.title}}</h2>
+          <h5>{{post.created_at}}</h5>
+          <p>{{post.body|truncatewords:20}}</p>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% else %}
+<p>no posts available</p>
+{% endif %}
+<!-- <h1 style="position: relative;top: 200px;left: 200px;">Welcome {{user}}</h1> -->
+{% else %}
+<h1 style="position: relative;top: 200px;left: 200px;">Welcome {{user}}</h1>
+{% endif %}
+
+
+{% endblock content %}

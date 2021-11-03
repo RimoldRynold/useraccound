@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+
+<div class="container" style="">
+    <div class="container mt-5">
+        <div class="p-4 m-4">
+            <div class="col-lg-4 mt-4 mb-4 mx-auto border border-dark p-4">
+                <h3 class="alert alert-light border rounded ">Login Here</h3>
+                <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    <!-- email -->
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="" class="form-control form-control-sm"
+                            placeholder="" value="">
+                    </div>
+                    <!-- end email -->
+                    <!-- password -->
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="" class="form-control form-control-sm"
+                            placeholder="" value="">
+                    </div>
+                    <!-- end password -->
+                    <!-- message -->
+                    {% if messages %}
+                    {% for message in messages %}
+					<p style="background-color: grey;
+                    color: #fff;
+                    padding: 10px;
+                    margin-top: 10px;">{{message}} <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
+				{% endfor %}	
+                {% endif %}
+		
+		
+                <!-- message ends -->
+                    <div class="form-group mt-2">
+                        <input class="btn btn-sm btn-info col-lg-3" type="submit" value="Login">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
