@@ -11,6 +11,13 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+    @property
+    def imageURL(self):
+        try:
+            img = self.avatar.url
+        except:
+            img = ''
+        return img
 
 class Posts(models.Model):
     userPost = models.ForeignKey(User,on_delete=models.CASCADE)

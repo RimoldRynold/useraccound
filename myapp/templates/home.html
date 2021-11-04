@@ -4,7 +4,7 @@
 
 
 
-{% if user.is_authenticated %}
+
               <!-- message -->
               {% if messages %}
               {% for message in messages %}
@@ -17,6 +17,7 @@
   
   
           <!-- message ends -->
+          {% if user.is_authenticated%}
           <div class="header">
             <h2>{{user}}'s posts</h2>
           </div>
@@ -31,17 +32,27 @@
           <h5>{{post.created_at}}</h5>
           <p>{{post.body|truncatewords:20}}</p>
         </a>
+        
+
       </div>
+      <form action="{% url 'post_delete' post.id %}" method="post" class="d-inline">
+        {% csrf_token %}
+        <button type="submit" class="btn">
+            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+        </button>
+    </form>
+    <a href="{% url 'post_update' post.id %}" class="btn text-secondary px-0">
+      <i class="far fa-edit fa-lg"></i>
+  </a>
       {% endfor %}
     </div>
   </div>
 {% else %}
-<p>no posts available</p>
+<h3 style="text-align:center;padding: 70px 0;">no posts available</h3>
 {% endif %}
-<!-- <h1 style="position: relative;top: 200px;left: 200px;">Welcome {{user}}</h1> -->
 {% else %}
-<h1 style="position: relative;top: 200px;left: 200px;">Welcome {{user}}</h1>
+<h3 style="text-align:center;padding: 70px 0;">no posts available</h3>
 {% endif %}
 
 
-{% endblock content %}
+{% endblock %}

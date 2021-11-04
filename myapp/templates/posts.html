@@ -13,7 +13,15 @@
           <p style="line-height: 1.6;">{{posts.body|linebreaks}}</p>
       
       </div>
-
+  <form action="{% url 'post_delete' posts.id %}" method="post" class="d-inline">
+        {% csrf_token %}
+        <button type="submit" class="btn">
+            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+        </button>
+    </form>
+    <a href="{% url 'post_update' posts.id %}" class="btn text-secondary px-0">
+      <i class="far fa-edit fa-lg"></i>
+  </a>
     </div>
   </div>
 
