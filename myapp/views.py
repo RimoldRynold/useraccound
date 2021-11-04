@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from .forms import * 
+from .models import *
 from django.views.generic import View
 from django.contrib import messages
 from django.http import JsonResponse
@@ -26,7 +27,6 @@ def post_create(request):
     if request.method == 'POST':
         post_form = PostForm(request.POST)
         if post_form.is_valid():
-
             post_form.instance.userPost = request.user
             post_form.save()
             messages.success(request, 'Your post was successfully created!')
@@ -34,7 +34,6 @@ def post_create(request):
         else:
             messages.error(request, 'Please enter correct data')
             return redirect('post_create')
-
     post_form = PostForm()
     return render(request, "create_post.html", context={"post_form": post_form})
 
@@ -70,7 +69,7 @@ def register(request):
         form = UserForm(request.POST)
         profile_form = UserProfileForm(request.POST,request.FILES)
         if form.is_valid() and profile_form.is_valid():
-            print('form valid')
+         
             user = form.save()
             profile = profile_form.save(commit=False)
             profile.user = user
@@ -94,12 +93,8 @@ def register(request):
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
-        print(username)
         password =request.POST['password']
-        print(password)
-        
         user = authenticate(username=username,password=password)
-        print(user)
         if user is not None:
             auth_login(request,user)
             messages.info(request,'you have successfully logged in')

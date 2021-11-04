@@ -1,52 +1,48 @@
 {% extends 'base.html' %}
 {% block content %}
-
-
-
-
-
-              <!-- message -->
-              {% if messages %}
-              {% for message in messages %}
-              <p style="background-color: grey;
+<!-- message -->
+{% if messages %}
+{% for message in messages %}
+<p style="background-color: grey;
               color: #fff;
               padding: 10px;
-              margin-top: 10px;">{{message}} <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
-          {% endfor %}	
-          {% endif %}
-  
-  
-          <!-- message ends -->
-          {% if user.is_authenticated%}
-          <div class="header">
-            <h2>{{user}}'s posts</h2>
-          </div>
+              margin-top: 10px;">{{message}} <span class="closebtn"
+    onclick="this.parentElement.style.display='none';">&times;</span> </p>
+{% endfor %}
+{% endif %}
+
+
+<!-- message ends -->
+{% if user.is_authenticated%}
+<div class="header">
+  <h2>{{user}}'s posts</h2>
+</div>
 
 {% if posts %}
 <div class="row">
-    <div class="leftcolumn">
-      {% for post in posts reversed %}
-      <div class="card">
-        <a style="text-decoration: none; color: black;" href="{% url 'posts' post.id %}">
-          <h2>{{post.title}}</h2>
-          <h5>{{post.created_at}}</h5>
-          <p>{{post.body|truncatewords:20}}</p>
-        </a>
-        
+  <div class="leftcolumn">
+    {% for post in posts reversed %}
+    <div class="card">
+      <a style="text-decoration: none; color: black;" href="{% url 'posts' post.id %}">
+        <h2>{{post.title}}</h2>
+        <h5>{{post.created_at}}</h5>
+        <p>{{post.body|truncatewords:20}}</p>
+      </a>
 
-      </div>
-      <form action="{% url 'post_delete' post.id %}" method="post" class="d-inline">
-        {% csrf_token %}
-        <button type="submit" class="btn">
-            <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
-        </button>
+
+    </div>
+    <form action="{% url 'post_delete' post.id %}" method="post" class="d-inline">
+      {% csrf_token %}
+      <button type="submit" class="btn">
+        <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+      </button>
     </form>
     <a href="{% url 'post_update' post.id %}" class="btn text-secondary px-0">
       <i class="far fa-edit fa-lg"></i>
-  </a>
-      {% endfor %}
-    </div>
+    </a>
+    {% endfor %}
   </div>
+</div>
 {% else %}
 <h3 style="text-align:center;padding: 70px 0;">no posts available</h3>
 {% endif %}
