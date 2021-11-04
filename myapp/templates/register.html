@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <div class="container" >
     <div class="container">
@@ -24,6 +24,9 @@
                         {{form.username}}
     
                     </div>
+                   
+                    <span id="checkusername" style="color: red;"></span>
+                 
            
                     <div class="form-group">
                         <label for="first_name"> First Name</label><br>
@@ -41,6 +44,7 @@
                         {{form.email}}
     
                     </div>
+                    <span id="checkemail" style="color: red;"></span>
      
                     <div class="form-group">
                         <label for="password1"> Password</label><br>
@@ -66,4 +70,56 @@
         </div>
     </div>
     </div>
+
+
+
+
+
+
+
+
+    <script>   
+ 
+        $("#id_username").change(function () {       
+           var username = $(this).val();       
+           $.ajax({        
+                 url: '/check_username/',         
+                 data: {           
+                     'username': username          
+                 },         
+                 dataType: 'json',            
+                 success: function (data) {           
+                      if (data.username_exists) {             
+                    $("#checkusername").text("username already taken");
+                    $("#checkusername").show();
+        
+                      }  
+                      else{
+                        $("#checkusername").hide();
+                      }
+                 }  
+           });      
+        });   
+
+        $("#id_email").change(function () {       
+           var email = $(this).val();       
+           $.ajax({        
+                 url: '/check_email/',         
+                 data: {           
+                     'email': email          
+                 },         
+                 dataType: 'json',            
+                 success: function (data) {           
+                      if (data.email_exists) {             
+                    $("#checkemail").text("email already in use");
+                    $("#checkemail").show();
+                       console.log('working')
+                      }  
+                      else{
+                        $("#checkemail").hide();
+                      }
+                 }  
+           });      
+        }); 
+     </script> 
 {% endblock %}
