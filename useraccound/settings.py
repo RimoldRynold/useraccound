@@ -26,6 +26,8 @@ SECRET_KEY = 'django-insecure-tf@9*w8)im5i7tdbgtx$xt%$$$4+ytu_s6mcdnem_fk%n*)=p$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+MAINTENANCE_MODE = 1
+
 ALLOWED_HOSTS = []
 
 
@@ -50,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'myapp.middlewares.middleware.MaintenanceModeMiddleware',
 ]
 
 ROOT_URLCONF = 'useraccound.urls'
