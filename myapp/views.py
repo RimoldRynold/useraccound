@@ -1,8 +1,16 @@
+from django.db.models.signals import pre_delete
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User,auth
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.core.signals import request_finished
+from django.dispatch import receiver
+from django.db.models.signals import post_save,pre_save,post_delete
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
+
 from .forms import * 
 from .models import *
 from django.views.generic import View
@@ -19,6 +27,10 @@ class HomeView(View):
         else:
             posts = Posts.objects.filter(userPost=request.user)
         return render(request,self.template_name,{'user':request.user,'posts':posts})
+
+# @receiver(request_finished)
+# def post_request_receiver(sender, **kwargs):
+#     print('request finished')
 
 
 class PostView(View):
@@ -102,9 +114,6 @@ class RegisterView(View):
             messages.error(request,'please enter data correctly')
             return redirect('register')
 
-
-
-
 class LoginView(View):
     template_name = 'login.html'
     def get(self,request):
@@ -116,10 +125,10 @@ class LoginView(View):
         user = authenticate(username=username,password=password)
         if user is not None:
             auth_login(request,user)
-            messages.info(request,'you have successfully logged in')
+            messages.success(request,'you have successfully logged in')
             return redirect('home')
         else:
-            messages.info(request,'username or password incorrect')
+            messages.error(request,'username or password incorrect')
             return redirect('login')
 
 
@@ -161,5 +170,10 @@ class CheckEmailView(View):
         return JsonResponse(data)
 
 
-def maintenance(request):
-    return render(request,'maintenance.html')
+class MaintenanceView(View):
+    template_name = 'maintenance.html'
+    def get(self,request):
+        return render(request,self.template_name)
+
+
+

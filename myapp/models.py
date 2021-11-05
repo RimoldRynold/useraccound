@@ -1,6 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
+from django.db.models.signals import post_save,pre_save,post_delete
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
+
+
+
 # Create your models here.
 
 
@@ -28,3 +35,28 @@ class Posts(models.Model):
 
     def __str__(self):
         return self.title
+
+
+# def save_post(sender, instance, **kwargs):
+#     print('post created')
+
+# def after_delete_post(sender, instance, **kwargs):
+#     print('post deleted')
+
+# pre_save.connect(save_post, sender=Posts)
+# post_save.connect(save_post, sender=Posts)
+# post_delete.connect(after_delete_post,sender=Posts)
+
+def success(sender, instance, **kwargs):
+    print('instance',instance.user.email)
+    template = render_to_string('email.html',{'name':instance.user})
+    email = EmailMessage(
+        'Thanks for registering',
+        template,
+        settings.EMAIL_HOST_USER,
+        [instance.user.email],
+    )
+    email.fail_silently=False
+    email.send()
+
+post_save.connect(success, sender=UserProfile)
