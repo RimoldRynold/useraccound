@@ -1,129 +1,146 @@
-
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <style>
-       
+  <!-- Bootstrap CSS -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 
+  <!-- script for same position after reload -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function(event) { 
+        var scrollpos = localStorage.getItem('scrollpos');
+        if (scrollpos) window.scrollTo(0, scrollpos);
+    });
+
+    window.onbeforeunload = function(e) {
+        localStorage.setItem('scrollpos', window.scrollY);
+    };
+</script>
+  <!--  -->
+  <style>
     * {
       box-sizing: border-box;
     }
-    
+
     body {
       font-family: Arial;
       padding: 20px;
       background: #f1f1f1;
     }
-    
+
     .header {
       padding: 2px;
       font-size: 40px;
       text-align: center;
       background: white;
     }
-    
-    .leftcolumn {   
+
+    .leftcolumn {
       float: left;
       width: 100%;
     }
-    
+
     .card {
-       background-color: white;
-       padding: 20px;
-       margin-top: 20px;
+      background-color: white;
+      padding: 20px;
+      margin-top: 20px;
     }
-    
+
     .row:after {
       content: "";
       display: table;
       clear: both;
     }
-    
+
     @media screen and (max-width: 800px) {
-      .leftcolumn, .rightcolumn {   
+
+      .leftcolumn,
+      .rightcolumn {
         width: 100%;
         padding: 0;
       }
     }
 
+    /*  */
+    .sticky-footer {
+      position: relative;
+      top: 100%;
+    }
+
+    footer ul {
+      list-style: none;
+      display: flex;
+      margin: 1em 0;
+    }
+
+    footer ul li a {
+      padding: 1em;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.904);
+      transition: 100ms;
+    }
+
+    footer ul li a:hover {
+      color: var(--primary);
+    }
+
+    footer {
+      width: 100%;
+      background: #000000;
+      color: #fff;
+      display: grid;
+      place-items: center;
+      padding: 0em;
+      font-size: 1.2rem;
+      bottom: -100px;
+    }
+
+    .block {
+      display: block;
+      width: 100%;
+      border: none;
+      background-color: #04AA6D;
+      padding: 14px 28px;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .col-2 {
+      flex: 0 0 auto;
+      width: 28.666667%;
+    }
+  </style>
 
 
-        /*  */
-        .sticky-footer{
-            position: relative;
-            top: 100%;
-        }
-        footer ul{
-            list-style: none;
-            display: flex;
-            margin: 1em 0;
-        }
-        footer ul li a{
-            padding: 1em;
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.904);
-            transition: 100ms;
-        }
-        footer ul li a:hover{
-            color: var(--primary);
-        }
-        footer{
-            width: 100%;
-            background: #000000;
-            color: #fff;
-            display: grid;
-            place-items: center;
-            padding: 0em;
-            font-size: 1.2rem;
-            bottom: -100px;
-        }
-      
-          .block {
-            display: block;
-            width: 100%;
-            border: none;
-            background-color: #04AA6D;
-            padding: 14px 28px;
-            font-size: 16px;
-            cursor: pointer;
-            text-align: center;
-          }
-          .col-2 {
-            flex: 0 0 auto;
-            width: 28.666667%;
-        }
-    
-    </style>
+</head>
 
-   
-  </head>
-  <body>
-<!-- nav bar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+<body>
+  <!-- nav bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
 
     <div class="container-fluid">
       <a class="navbar-brand" href="/"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-         
 
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-              </li>
-         
-         
+
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+          </li>
+
+
         </ul>
 
         <ul class="navbar-nav my-2 my-lg-0">
@@ -132,59 +149,60 @@
               <span class="badge bg-info text-dark"></span>
             </a>
           </li>
-          
-         
+
+
           {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'post_create' %}">Create Post</a>
-          </li> 
+          </li>
 
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'account' %}">Profile</a>
-          </li> 
+          </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout({{user}})</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout({{request.user}})</a>
           </li>
           {% else %}
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Signup</a>
-            </li>
-            <li class="nav-item">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Signup</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a>
           </li>
           {% endif %}
-         
-           
-           
-            
-          </ul>
 
 
 
-       
+
+        </ul>
+
+
+
+
       </div>
     </div>
   </nav>
 
-<!-- navbar end -->
+  <!-- navbar end -->
 
 
-{% block content %}
-
-
-
-
-{% endblock content %}
+  {% block content %}
 
 
 
 
+  {% endblock content %}
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 
-  </body>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+
+</body>
+
 </html>
-
-

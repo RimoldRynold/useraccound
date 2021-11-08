@@ -10,6 +10,7 @@ from django.db.models.signals import post_save,pre_save,post_delete
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.template.loader import render_to_string
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from .forms import * 
 from .models import *
@@ -23,9 +24,17 @@ class HomeView(View):
     template_name = 'home.html'
     def get(self, request):
         if not request.user.is_authenticated:
-            posts = ''
+            post = ''
         else:
-            posts = Posts.objects.filter(userPost=request.user)
+            post = Posts.objects.filter(userPost=request.user)
+        paginator = Paginator(post, 5)
+        page = request.GET.get('page', 1)
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
         return render(request,self.template_name,{'user':request.user,'posts':posts})
 
 # @receiver(request_finished)
@@ -144,7 +153,10 @@ class AccountSettingsView(View):
     def get(self,request):
         logined_username = request.user
         user_obj = User.objects.get(username=logined_username)
-        cust_obj = UserProfile.objects.get(user=user_obj)
+        if UserProfile.objects.filter(user__username=logined_username).exists():
+            cust_obj = UserProfile.objects.get(user=user_obj)
+        else:
+            cust_obj = ''
         context = {
         'user':cust_obj
         }

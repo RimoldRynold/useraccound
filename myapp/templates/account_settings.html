@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load socialaccount %}
 {% block content %}
 <style>
      .image-container {
@@ -40,7 +41,7 @@
 
 
 
-
+{% if user %}
 <div class="container">
         <div class="row">
             <div class="col-12">
@@ -122,5 +123,87 @@
             </div>
         </div>
     </div>
+{% else %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
 
+                <div class="card-body">
+                    <div class="card-title mb-4">
+                        <div class="d-flex justify-content-start">
+                            <div class="image-container">
+                                <img src="{{ request.user.socialaccount_set.all.0.get_avatar_url }}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                <!-- <div class="middle">
+                                    <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
+                                    <input type="file" style="display: none;" id="profilePicture" name="file" />
+                                </div> -->
+                            </div>
+                            <div class="userData ml-3">
+                                <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">{{request.user.username}}</h2>
+                               
+                            </div>
+                            <div class="ml-auto">
+                                <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+
+                            <div class="tab-content ml-1" id="myTabContent">
+                                <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
+                                    
+
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">First Name</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            {{request.user.first_name}} 
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Last Name</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            {{request.user.last_name}}
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-2 col-5">
+                                            <label style="font-weight:bold;">Email</label>
+                                        </div>
+                                        <div class="col-md-8 col-6">
+                                            {{request.user.email}}
+                                        </div>
+                                    </div>
+                                    <hr />
+                               
+                            
+                                 
+
+                                </div>
+                                <!-- <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
+                                    Facebook, Google, Twitter Account that are connected to this account
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock %}

@@ -47,16 +47,37 @@ class Posts(models.Model):
 # post_save.connect(save_post, sender=Posts)
 # post_delete.connect(after_delete_post,sender=Posts)
 
-def success(sender, instance, **kwargs):
-    print('instance',instance.user.email)
-    template = render_to_string('email.html',{'name':instance.user})
-    email = EmailMessage(
-        'Thanks for registering',
-        template,
-        settings.EMAIL_HOST_USER,
-        [instance.user.email],
-    )
-    email.fail_silently=False
-    email.send()
+# def success(sender, instance, **kwargs):
+#     if UserProfile.objects.filter(user__email__exact=instance.user.email).exists():
+#         print('if uerprofile')
+#     else:
+#         print('else uerprofile')
+#         print('instance',instance.user.email)
+#         template = render_to_string('email.html',{'name':instance.user})
+#         email = EmailMessage(
+#             'Thanks for registering',
+#             template,
+#             settings.EMAIL_HOST_USER,
+#             [instance.user.email],
+#         )
+#         email.fail_silently=False
+#         email.send()
 
-post_save.connect(success, sender=UserProfile)
+# post_save.connect(success, sender=UserProfile)
+
+def success(sender, instance, **kwargs):
+    if User.objects.filter(email__exact=instance.email).exists():
+        print('if user')
+    else:
+        print('else user')
+        template = render_to_string('email.html',{'name':instance})
+        email = EmailMessage(
+            'Thanks for registering',
+            template,
+            settings.EMAIL_HOST_USER,
+            [instance.email],
+        )
+        email.fail_silently=False
+        email.send()
+
+pre_save.connect(success, sender=User)
