@@ -8,6 +8,6 @@ from .views import *
 
 urlpatterns = [
     path('',PostCreateAPIView.as_view()),
-    path('update/<int:id>',PostUpdateAPIView.as_view()),
+    path('<int:id>',PostUpdateAPIView.as_view()),
     
 ]

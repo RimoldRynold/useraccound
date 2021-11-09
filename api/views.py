@@ -1,4 +1,3 @@
-
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view 
@@ -14,6 +13,8 @@ from myapp.models import *
 from .serializers import *
 
 class PostCreateAPIView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     def get(self,request):
         articles = Posts.objects.all()
         serializer = PostSerializer(articles, many=True)
@@ -29,6 +30,8 @@ class PostCreateAPIView(APIView):
     
     
 class PostUpdateAPIView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     def get_object(self ,id):
         try:
             return Posts.objects.get(id=id)
