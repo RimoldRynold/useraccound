@@ -85,17 +85,28 @@ WSGI_APPLICATION = 'useraccound.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'useraccount',
+#         'USER': 'postgres', 
+#         'PASSWORD': 'root' ,
+#         'HOST': 'localhost'
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'useraccount',
-        'USER': 'postgres', 
-        'PASSWORD': 'root' ,
-        'HOST': 'localhost'
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'useraccount', # example - blog_data
+        'USER': 'rimold',
+        'PASSWORD': 'e5b2d4a065d7a018d85426cbdb054e1d_T',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
-
+# passwor = e5b2d4a065d7a018d85426cbdb054e1d_T
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
