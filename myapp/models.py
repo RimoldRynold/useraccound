@@ -14,6 +14,7 @@ from django.template.loader import render_to_string
 class UserProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to ='uploads/')
+    is_premium = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username

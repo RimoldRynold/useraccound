@@ -78,12 +78,12 @@ WSGI_APPLICATION = 'useraccound.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # DATABASES = {
 #     'default': {
@@ -95,16 +95,16 @@ WSGI_APPLICATION = 'useraccound.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'useraccount', # example - blog_data
-        'USER': 'rimold',
-        'PASSWORD': 'e5b2d4a065d7a018d85426cbdb054e1d_T',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'useraccount', # example - blog_data
+#         'USER': 'rimold',
+#         'PASSWORD': 'e5b2d4a065d7a018d85426cbdb054e1d_T',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
 
 # passwor = e5b2d4a065d7a018d85426cbdb054e1d_T
 # Password validation
@@ -182,7 +182,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SITE_ID = 1
+SITE_ID = 2
 LOGIN_REDIRECT_URL = '/'
 
 # # Additional configuration settings

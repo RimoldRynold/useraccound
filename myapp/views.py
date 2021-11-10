@@ -18,11 +18,13 @@ from .models import *
 from django.views.generic import View
 from django.contrib import messages
 from django.http import JsonResponse
+from .decorators import *
 # Create your views here.
 
 
 class HomeView(View):
     template_name = 'home.html'
+    @method_decorator(is_premium_user)
     def get(self, request):
         if not request.user.is_authenticated:
             post = ''
@@ -151,6 +153,7 @@ def logoutUser(request):
 class AccountSettingsView(View):
     template_name = 'account_settings.html'
     @method_decorator(login_required(login_url='login'))
+    
     def get(self,request):
         logined_username = request.user
         user_obj = User.objects.get(username=logined_username)
