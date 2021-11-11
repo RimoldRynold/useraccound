@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 
 from myapp.views import PostUpdateView
 from .views import *

@@ -1,17 +1,9 @@
-from django.db.models.signals import pre_delete
 from django.shortcuts import redirect, render
-from django.contrib.auth.models import User,auth
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from django.core.signals import request_finished
-from django.dispatch import receiver
-from django.db.models.signals import post_save,pre_save,post_delete
-from django.core.mail import EmailMessage
-from django.conf import settings
-from django.template.loader import render_to_string
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-
 
 from .forms import * 
 from .models import *

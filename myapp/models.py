@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.deletion import CASCADE
 from django.db.models.signals import post_save,pre_save,post_delete
 from django.core.mail import EmailMessage
 from django.conf import settings
@@ -71,6 +70,7 @@ def success(sender, instance, **kwargs):
         print('if user')
     else:
         print('else user')
+        print(instance.email)
         template = render_to_string('email.html',{'name':instance})
         email = EmailMessage(
             'Thanks for registering',
