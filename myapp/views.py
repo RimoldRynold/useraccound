@@ -159,12 +159,14 @@ class AccountSettingsView(View):
         return render(request, self.template_name, context)
 
 
-class CheckUserNameView(View):
+class CheckUserNameEmailView(View):
     def get(self, request):
         username = request.GET.get('username')
         email = request.GET.get('email')
+        print(request)
         data = {
-        'username_exists':UserProfile.objects.filter(user__username__iexact=username).exists(),
+        'username_exists':UserProfile.objects.filter(user__username__exact=username).exists(),
+        'email_exists':UserProfile.objects.filter(user__email__exact=email).exists(),
         }
         return JsonResponse(data)
 
@@ -173,7 +175,7 @@ class CheckEmailView(View):
     def get(self, request):
         email = request.GET.get('email')
         data = {
-        'email_exists':UserProfile.objects.filter(user__email__iexact=email).exists(),
+        'email_exists':UserProfile.objects.filter(user__email__exact=email).exists(),
         }
         return JsonResponse(data)
 

@@ -81,4 +81,4 @@ def success(sender, instance, **kwargs):
         email.fail_silently=False
         email.send()
 
-pre_save.connect(success, sender=User)
+# pre_save.connect(success, sender=User)

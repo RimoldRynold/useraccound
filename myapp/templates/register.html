@@ -4,7 +4,7 @@
 {% block content %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<div class="container" >
+<div class="container">
     <div class="container">
         <div class="p-4 m-2">
             <div class="col-lg-5 mx-auto border border-dark p-4">
@@ -13,107 +13,118 @@
                     {% csrf_token %}
                     {% if messages %}
                     {% for message in messages %}
-					<p style="background-color: grey;
+                    <p style="background-color: grey;
                     color: #fff;
                     padding: 10px;
-                    margin-top: 10px;">{{message}} <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> </p>
-				{% endfor %}	
-                {% endif %}
-                <br>
+                    margin-top: 10px;">{{message}} <span class="closebtn"
+                            onclick="this.parentElement.style.display='none';">&times;</span> </p>
+                    {% endfor %}
+                    {% endif %}
+                    <br>
                     <div class="form-group">
                         <label for="username"> Username</label><br>
                         {{form.username}}
-    
+
                     </div>
-                   
+
                     <span id="checkusername" style="color: red;"></span>
-                 
-           
+
+
                     <div class="form-group">
                         <label for="first_name"> First Name</label><br>
                         {{form.first_name}}
-    
+
                     </div>
-           
+
                     <div class="form-group">
                         <label for="last_name"> Last Name</label><br>
                         {{form.last_name}}
-    
+
                     </div>
                     <div class="form-group">
                         <label for="email"> Email</label><br>
                         {{form.email}}
-    
+
                     </div>
                     <span id="checkemail" style="color: red;"></span>
-     
+
                     <div class="form-group">
                         <label for="password1"> Password</label><br>
                         {{form.password1}}
-    
+
                     </div>
-         
+
                     <div class="form-group">
                         <label for="password2"> Re-type Password</label><br>
                         {{form.password2}}
-    
+
                     </div>
-                  
+
                     <div class="form-group">
                         <label for="avatar"> Profile Picture</label><br>
                         {{profile_form.avatar}}
-    
+
                     </div>
                     <br>
-                    <input class="btn btn-bg btn-info" type="submit" value="Sign Up" >
+                    <input class="btn btn-bg btn-info" type="submit" value="Sign Up">
                 </form>
-              
+
             </div>
         </div>
     </div>
-    </div>
-    <script>   
- 
-        $("#id_username").change(function () {       
-           var username = $(this).val();       
-           $.ajax({        
-                 url: '/check_username/',         
-                 data: {           
-                     'username': username          
-                 },         
-                 dataType: 'json',            
-                 success: function (data) {           
-                      if (data.username_exists) {             
+</div>
+<script>
+
+    $("#id_username,#id_email").change(function () {
+        var username = $("#id_username").val();
+        var email = $("#id_email").val();
+        $.ajax({
+            url: '/check-username-email/',
+            data: {
+                'username': username,
+                'email': email
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.username_exists) {
                     $("#checkusername").text("username already taken");
                     $("#checkusername").show();
-        
-                      }  
-                      else{
-                        $("#checkusername").hide();
-                      }
-                 }  
-           });      
-        });   
 
-        $("#id_email").change(function () {       
-           var email = $(this).val();       
-           $.ajax({        
-                 url: '/check_email/',         
-                 data: {           
-                     'email': email          
-                 },         
-                 dataType: 'json',            
-                 success: function (data) {           
-                      if (data.email_exists) {             
+                }
+                else {
+                    $("#checkusername").hide();
+                }
+                if (data.email_exists) {
                     $("#checkemail").text("email already in use");
                     $("#checkemail").show();
-                       console.log('working')
-                      }  
-                      else{
-                        $("#checkemail").hide();
-                      }
-                 }  
-           });      
-        }); 
-     </script> 
+                    console.log('working')
+                }
+                else {
+                    $("#checkemail").hide();
+                }
+            }
+        });
+    });
+
+    // $("#id_email").change(function () {
+    //     var email = $(this).val();
+    //     $.ajax({
+    //         url: '/check_email/',
+    //         data: {
+    //             'email': email
+    //         },
+    //         dataType: 'json',
+    //         success: function (data) {
+    //             if (data.email_exists) {
+    //                 $("#checkemail").text("email already in use");
+    //                 $("#checkemail").show();
+    //                 console.log('working')
+    //             }
+    //             else {
+    //                 $("#checkemail").hide();
+    //             }
+    //         }
+    //     });
+    // });
+</script>
 {% endblock %}

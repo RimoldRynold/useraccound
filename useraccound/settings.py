@@ -162,7 +162,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'rosyrynold@gmail.com'
-EMAIL_HOST_PASSWORD = 'rynosham@_1998'
+EMAIL_HOST_PASSWORD = 'rynosham@_@1998'
 
 
 AUTHENTICATION_BACKENDS = [
@@ -182,7 +182,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SITE_ID = 2
+SITE_ID = 3
 LOGIN_REDIRECT_URL = '/'
 
 # # Additional configuration settings

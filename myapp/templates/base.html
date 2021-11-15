@@ -14,15 +14,15 @@
 
   <!-- script for same position after reload -->
   <script>
-    document.addEventListener("DOMContentLoaded", function(event) { 
-        var scrollpos = localStorage.getItem('scrollpos');
-        if (scrollpos) window.scrollTo(0, scrollpos);
+    document.addEventListener("DOMContentLoaded", function (event) {
+      var scrollpos = localStorage.getItem('scrollpos');
+      if (scrollpos) window.scrollTo(0, scrollpos);
     });
 
-    window.onbeforeunload = function(e) {
-        localStorage.setItem('scrollpos', window.scrollY);
+    window.onbeforeunload = function (e) {
+      localStorage.setItem('scrollpos', window.scrollY);
     };
-</script>
+  </script>
   <!--  -->
   <style>
     * {
@@ -154,10 +154,11 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'post_create' %}">Create Post</a>
           </li>
-
+          {% if cust_obj or request.user.first_name %}
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'account' %}">Profile</a>
           </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout({{request.user}})</a>
           </li>
