@@ -3,7 +3,7 @@
 <!-- message -->
 {% if messages %}
 {% for message in messages %}
-<p style="background-color: grey;
+<p id="message" style="background-color: grey;
               color: #fff;
               padding: 10px;
               margin-top: 10px;">{{message}} <span class="closebtn"
@@ -88,4 +88,11 @@
 </nav>
 {% endif %}
 <!-- pagination ends -->
+
+<script>
+  $(document).ready(function(){
+    $('#message').slideUp(2000)
+  })
+</script>
+
 {% endblock %}
