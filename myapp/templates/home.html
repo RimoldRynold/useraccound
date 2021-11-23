@@ -19,9 +19,20 @@
 </div>
 
 {% if posts %}
+
+
+<div class="input-group rounded my-2">
+  <div class="form-outline">
+    <input style="position:relative;left: 432%;" id="search-input-sidenav" type="search" id="form1" class="form-control"
+      placeholder="search" />
+
+  </div>
+</div>
+
+
 <div class="row">
   <div class="leftcolumn">
-    {% for post in posts reversed %}
+    {% for post in posts %}
     <div class="card">
       <a style="text-decoration: none; color: black;" href="{% url 'posts' post.id %}">
         <h2>{{post.title}}</h2>
@@ -34,7 +45,7 @@
     <form action="{% url 'post_delete' post.id %}" method="post" class="d-inline">
       {% csrf_token %}
       <button type="submit" class="btn">
-        <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+        <i id="delete" class="far fa-trash-alt fa-lg text-danger float-right"></i>
       </button>
     </form>
 
@@ -90,9 +101,20 @@
 <!-- pagination ends -->
 
 <script>
-  $(document).ready(function(){
+  $(document).ready(function () {
     $('#message').slideUp(2000)
-  })
+
+    // search
+    $(".form-control").on("keyup", function () {
+      console.log('hai')
+      var value = $(this).val().toLowerCase();
+      $("a, #delete").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+
+      });
+    });
+
+  });
 </script>
 
 {% endblock %}

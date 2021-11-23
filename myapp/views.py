@@ -21,7 +21,7 @@ class HomeView(View):
         if not request.user.is_authenticated:
             post = ''
         else:
-            post = Posts.objects.filter(userPost=request.user)
+            post = Posts.objects.filter(userPost=request.user).order_by('-id')
         paginator = Paginator(post, 5)
         page = request.GET.get('page', 1)
         try:
@@ -62,7 +62,6 @@ class PostCreateView(View):
         else:
             messages.error(request, 'Please enter correct data')
             return redirect('post_create')
-
 
 class PostUpdateView(View):
     template_name = "update_post.html"
