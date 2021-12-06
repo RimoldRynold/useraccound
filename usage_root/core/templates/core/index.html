@@ -1,0 +1,62 @@
+{% extends 'core/layout.html' %}
+
+{% block title %}Summary{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>STATS</h1>
+    <div class="row">
+        <div class="col-md-2">
+            <div>
+                Bots Alive:
+            </div>
+            <div>
+                {{ bots_alive }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div>
+                Total Users Scraped:
+            </div>
+            <div>
+                {{ users_scraped }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div>
+                Total DMs Sent:
+            </div>
+            <div>
+                {{ received_dm }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div>
+                Successful DMs:
+            </div>
+            <div>
+                {{ successful_dm }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div>
+                Unsuccessful DMs:
+            </div>
+            <div>
+                {{ unsuccessful_dm }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div>
+                <a href="/admin">Go to site admin!</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

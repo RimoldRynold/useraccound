@@ -1,0 +1,9 @@
+{% extends 'core/layout.html' %}
+
+{% block body %}
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="token" placeholder="token">
+        <input type="submit" value="login">
+    </form>
+{% endblock %}

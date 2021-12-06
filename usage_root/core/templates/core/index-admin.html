@@ -1,0 +1,64 @@
+{% extends 'core/layout.html' %}
+
+{% block title %}Summary{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% for user in data %}
+    <h3>{{ user.name }}</h3>
+    <div class="row">
+        <div class="col-md-2">
+            <div>
+                Bots Alive:
+            </div>
+            <div>
+                {{ user.bots_alive }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div>
+                Total Users Scraped:
+            </div>
+            <div>
+                {{ user.users_scraped }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div>
+                Total DMs Sent:
+            </div>
+            <div>
+                {{ user.received_dm }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div>
+                Successful DMs:
+            </div>
+            <div>
+                {{ user.successful_dm }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div>
+                Unsuccessful DMs:
+            </div>
+            <div>
+                {{ user.unsuccessful_dm }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div>
+                <a href="/admin">Go to site admin!</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

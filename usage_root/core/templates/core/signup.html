@@ -1,0 +1,284 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}SignUp Page{% endblock %}
+{% block content %}
+<style>
+    #pswd_info {
+        position: absolute;
+        bottom: 41px;
+        bottom: -115px\9;
+        /* IE Specific */
+        right: 91px;
+        width: 250px;
+        padding: 15px;
+        background: #fefefe;
+        font-size: .875em;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px #ccc;
+        border: 1px solid #ddd;
+    }
+
+    #pswd_info h4 {
+        margin: 0 0 10px 0;
+        padding: 0;
+        font-weight: normal;
+    }
+
+    #pswd_info::before {
+        content: "\25B2";
+        position: absolute;
+        top: -12px;
+        left: 45%;
+        font-size: 14px;
+        line-height: 14px;
+        color: #ddd;
+        text-shadow: none;
+        display: block;
+    }
+
+    .invalid {
+        background: url(../images/invalid.png) no-repeat 0 50%;
+        padding-left: 22px;
+        line-height: 24px;
+        color: #ec3f41;
+    }
+
+    .valid {
+        background: url(../images/valid.png) no-repeat 0 50%;
+        padding-left: 22px;
+        line-height: 24px;
+        color: #3a7d34;
+    }
+
+    #pswd_info {
+        display: none;
+    }
+</style>
+
+
+<body class="loading authentication-bg" data-layout-config='
+      {"leftSideBarTheme":"dark",
+      "layoutBoxed":false,
+      "leftSidebarCondensed":false,
+      "leftSidebarScrollable":false,
+      "darkMode":false,
+      "showRightSidebarOnStart": true}'>
+
+    <div class="account-pages mt-5 mb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card">
+                        <!-- Logo-->
+
+
+                        <div class="card-body p-4">
+
+                            <form action="{% url 'core:signup' %}" method="post">
+                                {% csrf_token %}
+                                <h1 style="text-align: center">Sign Up</h1>
+                                <br>
+                                {% if messages %}
+                                {% for message in messages %}
+                                <p style="background-color: grey;color: #fff;padding: 10px;margin-top: 10px;">{{message}} <span class="closebtn"
+                                        onclick="this.parentElement.style.display='none';">&times;</span> </p>
+                                {% endfor %}
+                                {% endif %}
+                                <div class="row">
+                                    <!-- First Name -->
+                                    <div class="input-group col-lg-12 mb-4">
+                                        <input name="first_name" id="id_first_name" placeholder="First name"
+                                            value="{{first_name}}" class="form-control" required="required">
+                                    </div>
+
+                                    <!-- Last name -->
+                                    <div class="input-group col-lg-12 mb-4">
+                                        <input name="last_name" id="id_last_name" placeholder="Last name"
+                                            class="form-control" required="required" value="{{last_name}}">
+                                    </div>
+
+                                    <!-- Email Address -->
+                                    <div class="input-group col-lg-12 mb-4">
+                                        <input  name="email" id="id_email" placeholder="Email" class="form-control"
+                                            required="required" type="email" value="{{email}}">
+                                        <span class="input-group col-lg-12" id="checkemail" style="color: red;"></span>
+                                    </div>
+
+
+                                    <!-- Password -->
+                                    <div class="input-group col-lg-6">
+                                        <input name="password1" id="id_password1" placeholder="Enter Password"
+                                            class="form-control" type="password" required="required">
+                                    </div>
+
+
+                                    <!-- Password Confirmation -->
+                                    <div class="input-group col-lg-6">
+                                        <input name="password2" id="id_password2" placeholder="Confirm Password"
+                                            class="form-control" type="password" required="required">
+
+                                    </div>
+                                    <!--  -->
+                                    <div class="input-group col-12" id="msg"></div>
+                                    <!--  -->
+
+                                    <!-- Submit Button -->
+                                    <div id="signInDiv" class="form-group col-lg-12 mx-auto mb-0 mt-3">
+                                        <input type="submit" name="signin" id="signin"
+                                            class="btn btn-primary btn-block py-2" value="Create Your Account" />
+                                    </div>
+
+                                    <!-- Divider Text -->
+                                    <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">
+                                        <div class="border-bottom w-100 ml-5"></div>
+                                        <span class="px-2 small text-muted font-weight-bold text-muted">OR</span>
+                                        <div class="border-bottom w-100 mr-5"></div>
+                                    </div>
+
+                                    <div class="form-group col-lg-12 mx-auto mb-0">
+                                        <a href="{% url 'core:login' %}" class="btn btn-success btn-block py-2">
+                                            <span class="font-weight-bold">Sign In</span>
+                                        </a>
+                                    </div>
+                                    <!-- validation -->
+
+                                    <div class="col-lg-12" id="pswd_info">
+                                        <h4>Password must meet the following requirements:</h4>
+                                        <ul>
+                                            <li id="empty" class="invalid"> <strong>Can not be empty</strong></li>
+                                            <li id="letter" class="invalid">At least <strong>one letter</strong></li>
+                                            <li id="capital" class="invalid">At least <strong>one capital
+                                                    letter</strong></li>
+                                            <li id="number" class="invalid">At least <strong>one number</strong></li>
+                                            <li id="length" class="invalid">Be at least <strong>8 characters</strong>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!--  -->
+                                </div>
+                            </form>
+
+
+                        </div> <!-- end card-body -->
+                    </div>
+                    <!-- end card -->
+                    <!-- end row -->
+
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+
+    
+
+</body>
+<script>
+    $('input[name=password1]').keyup(function () {
+        var pswd = $(this).val();
+        if (pswd.length < 8) {
+            $('#length').removeClass('valid').addClass('invalid');
+        } else {
+            $('#length').removeClass('invalid').addClass('valid');
+        }
+        //whether empty
+        if (pswd.length == 0) {
+            $('#empty').removeClass('valid').addClass('invalid');
+        } else {
+            $('#empty').removeClass('invalid').addClass('valid');
+        }
+        //validate letter
+        if (pswd.match(/[A-z]/)) {
+            $('#letter').removeClass('invalid').addClass('valid');
+        } else {
+            $('#letter').removeClass('valid').addClass('invalid');
+        }
+
+        //validate capital letter
+        if (pswd.match(/[A-Z]/)) {
+            $('#capital').removeClass('invalid').addClass('valid');
+        } else {
+            $('#capital').removeClass('valid').addClass('invalid');
+        }
+
+        //validate number
+        if (pswd.match(/\d/)) {
+            $('#number').removeClass('invalid').addClass('valid');
+        } else {
+            $('#number').removeClass('valid').addClass('invalid');
+        }
+    }).focus(function () {
+        $('#pswd_info').show();
+    }).blur(function () {
+        $('#pswd_info').hide();
+    });
+    //
+    $("#id_email").change(function () {
+        var email = $("#id_email").val();
+        
+        $.ajax({
+            url: '/check_email/',
+            data: {
+                'email': email
+            },
+            dataType: 'json',
+            success: function (data) {
+                //
+                if(IsEmail(email)==false){
+                    $("#checkemail").text("Email-id is invalid");
+                    $("#checkemail").show();
+                    return false;
+                }
+                else if (email.length === 0) {
+                    $("#checkemail").hide();
+                }
+                function IsEmail(email) {
+                    var regex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                    if(!regex.test(email)) {
+                       return false;
+                    }
+                    else{
+                       return true;
+                    }
+                  }
+                    //
+                if (data.email_exists) {
+                    $("#checkemail").text("email already in use");
+                    $("#checkemail").show();
+                   
+                }
+                else {
+                    $("#checkemail").hide();
+                }
+                
+            }
+        });
+    });
+
+    //pass check
+    $(document).ready(function () {
+        $("#id_password2,#id_password1").keyup(function () {
+            if ($("#id_password1").val().replace(/ /g, "") !== "" && $("#id_password2").val().replace(/ /g, "") !== "") {
+                if ($("#id_password1").val() != $("#id_password2").val()) {
+                    $("#msg").html("Password do not match").css("color", "red");
+                } else {
+                    $("#msg").html("Password matched").css("color", "green");
+                }
+            }
+            else if ($("#id_password1").val() == "" && $("#id_password2").val()) {
+                $("#msg").html("Password do not match").css("color", "red");
+            }
+            else {
+                $("#msg").html("")
+            }
+
+        });
+    });
+
+</script>
+
+</html>
+
+{% endblock %}
