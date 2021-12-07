@@ -44,7 +44,7 @@
                             <div class="col-6">
                                 <div class="illustration-text p-3 m-1">
                                     <h4 class="illustration-text">Welcome  {{request.user|username}}!</h4>
-                                    <p class="mb-0">AppStack Dashboard</p>
+                                    <!-- <p class="mb-0">AppStack Dashboard</p> -->
                                 </div>
                             </div>
                             <div class="col-6 align-self-end text-end">
@@ -59,12 +59,12 @@
                     <div class="card-body py-4">
                         <div class="d-flex align-items-start">
                             <div class="flex-grow-1">
-                                <h3 class="mb-2">$ 24.300</h3>
-                                <p class="mb-2">Total Earnings</p>
-                                <div class="mb-0">
+                                <h3 class="mb-2">$ {{balance}}</h3>
+                                <p class="mb-2">Left on your Twilio account</p>
+                                <!-- <div class="mb-0">
                                     <span class="badge badge-soft-success me-2"> +5.35% </span>
                                     <span class="text-muted">Since last week</span>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="d-inline-block ms-3">
                                 <div class="stat">

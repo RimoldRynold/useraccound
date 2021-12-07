@@ -8,8 +8,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views import View
 from django.contrib.auth.models import Group
-
 from .decorators import unauthenticated_user, admin_only ,allowed_users
+from twilio.rest import Client
+from django.conf import settings
 
 from .forms import CustomUserCreationForm
 
@@ -135,7 +136,13 @@ class DashboardView(View):
     @method_decorator(login_required(login_url='core:login'))
     @method_decorator(admin_only)
     def get(self, request):
-        return render(request, self.template_name)
+        client = Client(settings.TWILIO_ACCOUNT_SID,settings.TWILIO_AUTH_TOKEN)
+        balance = float(client.api.v2010.balance.fetch().balance)
+        currency = client.api.v2010.balance.fetch().currency
+        context = {
+            'balance':balance
+        }
+        return render(request, self.template_name,context)
     
 class ClientPageView(View):
     template_name = 'core/client-dashboard.html'

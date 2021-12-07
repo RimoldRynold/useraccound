@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     
     'voice',
     'core',
-    'api'
+    'api',
+    
+    #crontab
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -157,3 +160,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # )
 
 AUTH_USER_MODEL = 'core.User'
+
+#twilio config
+TWILIO_ACCOUNT_SID = 'AC2de62fbf27731a3be54704bcf8bfd1a9'
+TWILIO_AUTH_TOKEN = 'fd250b45f3d61032fee8d12a5a2ae0d3'
+
+#crontab
+CRONJOBS = [
+    ('*/1 * * * *', 'core.cron.my_cron_job')
+]

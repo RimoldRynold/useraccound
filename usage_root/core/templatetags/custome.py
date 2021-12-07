@@ -6,4 +6,4 @@ def username(name):
     if name.first_name:
         return name.first_name
     else:
-        return str(name).partition('@')[0]
+        return str(name)
