@@ -3,6 +3,8 @@ from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserCreationForm
 from .models import (
+    Notification,
+    Threshold,
     User,
     Bot,
     UserMessageData,
@@ -70,3 +72,6 @@ class RoleAdmin(admin.ModelAdmin):
 @admin.register(LogData)
 class LogDataAdmin(admin.ModelAdmin):
     list_filter = ['success', 'user']
+    
+admin.site.register(Threshold)
+admin.site.register(Notification)

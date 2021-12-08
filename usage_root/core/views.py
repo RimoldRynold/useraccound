@@ -18,6 +18,7 @@ from .models import (
     ScrapedUser,
     Bot,
     LogData,
+    Threshold,
     User
 )
 
@@ -136,11 +137,17 @@ class DashboardView(View):
     @method_decorator(login_required(login_url='core:login'))
     @method_decorator(admin_only)
     def get(self, request):
-        client = Client(settings.TWILIO_ACCOUNT_SID,settings.TWILIO_AUTH_TOKEN)
-        balance = float(client.api.v2010.balance.fetch().balance)
+        client = Client(settings.ACCOUNT_API_KEY,settings.ACCOUNT_API_SECRET,settings.TWILIO_ACCOUNT_SID)
+        # balance = float(client.api.v2010.balance.fetch().balance)
+        balance = 35.5
         currency = client.api.v2010.balance.fetch().currency
+        thresholds = Threshold.objects.all()
+        if request.user.groups.all()[0].name == 'App Admin Group':
+            group = True
         context = {
-            'balance':balance
+            'balance':balance,
+            'thresholds':thresholds,
+            'group':group
         }
         return render(request, self.template_name,context)
     

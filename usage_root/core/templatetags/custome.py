@@ -7,3 +7,8 @@ def username(name):
         return name.first_name
     else:
         return str(name)
+    
+@register.filter(name='state')
+def state(val,bal):
+    if float(val) >= float(bal):
+        return True

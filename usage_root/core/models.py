@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from .managers import CustomUserManager
+import datetime
 
 from .utils import get_token
 
@@ -21,6 +22,19 @@ class User(AbstractUser):
 
     def __str__(self) -> str:
         return f"{ self.username }"
+    
+class Threshold(models.Model):
+    value = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.value
+
+class Notification(models.Model):
+    to_user = models.CharField(max_length=100)
+    created_at = models.DateField(default=datetime.date.today)
+    
+    def __str__(self):
+        return self.to_user
 
 class Bot(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='bots')

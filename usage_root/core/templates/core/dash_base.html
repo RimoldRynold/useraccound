@@ -61,13 +61,71 @@
                 </a>
 
                 <ul class="sidebar-nav">
-                    <li class="sidebar-header">
+                    <!-- <li class="sidebar-header">
                         Pages
-                    </li>
+                    </li> -->
                     <li class="sidebar-item active">
                         <a data-bs-target="#dashboards" class="sidebar-link">
-                            <i class="align-middle" data-feather="sliders"></i> <span
-                                class="align-middle">Dashboard</span>
+                            <i class="align-middle" data-feather="sliders"></i> 
+                            <!-- <i class="align-middle" data-feather=""></i>  -->
+                            <span
+                                class="align-middle">Account Balance</span>
+                                <!-- table -->
+                                {% if group %}
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Threshold Balance</th>
+                                            <th class="text">State</th>
+                                
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for threshold in thresholds %}
+                                        <tr>
+                                            <td style="color: white;"><i class=""></i> {{threshold.value}}</td>
+                                            {% if threshold.value|state:balance %}
+                                            <td class="text text-danger">alarm</td>
+                                            {% else %}
+                                            <td class="text text-success">OK</td>
+                                            {% endif %}
+                                            
+                                        </tr>
+                                        {% endfor %}
+                                        <!-- <tr>
+                                            <td><i class=""></i> 100</td>
+                                            
+                                            <td class="text text-success">OK</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class=""></i> 50</td>
+                                            
+                                            <td class="text text-danger">alarm</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class=""></i> 30</td>
+                                            
+                                            <td class="text text-danger">alarm</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class=""></i> 20</td>
+                                            
+                                            <td class="text text-danger">alarm</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class=""></i> 10</td>
+                                            
+                                            <td class="text text-danger">alarm</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class=""></i> 0</td>
+                                            
+                                            <td class="text text-danger">alarm</td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                                {% endif %}
+                                <!--  -->
 
                         </a>
 
