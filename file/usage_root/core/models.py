@@ -32,10 +32,15 @@ class Threshold(models.Model):
 
 class Notification(models.Model):
     to_user = models.CharField(max_length=100)
+    webhook_url = models.URLField(max_length=250)
     created_at = models.DateField(default=datetime.date.today)
+    
     
     def __str__(self):
         return self.to_user
+class TwilioApi(models.Model):
+    api_status = models.BooleanField(default=False)
+    balance = models.FloatField(null=True,blank=True)
 
 class Bot(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='bots')

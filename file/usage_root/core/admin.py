@@ -5,6 +5,7 @@ from .forms import CustomUserCreationForm
 from .models import (
     Notification,
     Threshold,
+    TwilioApi,
     User,
     Bot,
     UserMessageData,
@@ -79,3 +80,7 @@ class ThresholdAdmin(admin.ModelAdmin):
     list_display = ['value','flag']
     list_editable = ['flag']
 admin.site.register(Notification)
+
+@admin.register(TwilioApi)
+class TwilioApiAdmin(admin.ModelAdmin):
+    list_display = ['api_status']

@@ -1,0 +1,100 @@
+{% extends 'core/dash_base.html' %}
+{% load static %}
+{% load custome %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+
+<main class="content">
+	<div class="container-fluid p-0">
+
+		<h1 class="h3 mb-3">Notification Settings</h1>
+
+		<div class="row">
+			{% if not notification %}
+			<!-- create -->
+			<form action="{% url 'core:notification-settings' %}" method="post">
+				{% csrf_token %}
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="card-title">Create Notification to</h5>
+						<h6 class="card-subtitle text-muted">Notification will go to the details entered</h6>
+					</div>
+					<div class="card-body">
+						<form class="row row-cols-md-auto align-items-center">
+							<div class="col-12">
+								<label class="form-label">Email address</label>
+								<input name="to_user" type="email" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2"
+									placeholder="example@domain.com" required>
+							</div>
+
+							<div class="col-12">
+								<label class="form-label">Slack webhook url</label>
+								<div class="input-group mb-2 mr-sm-2">
+
+									<input name="webhook_url" type="url" class="form-control" id="inlineFormInputGroupUsername2"
+										placeholder="https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX" required>
+								</div>
+							</div>
+
+							<div class="col-12">
+								<label class="form-label"> &nbsp; &nbsp; &nbsp; </label>
+								<div class="input-group mb-2 mr-sm-2">
+
+									<button type="submit" class="btn btn-primary mb-2">Submit</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</form>
+<!-- create ends -->
+<!-- update -->
+{% else %}
+<form action="{% url 'core:notification-settings' %}" method="post">
+	{% csrf_token %}
+<div class="col-md-12">
+	<div class="card">
+		<div class="card-header">
+			<h5 class="card-title">Change Notification to</h5>
+			<h6 class="card-subtitle text-muted">Notification will go to the details entered</h6>
+		</div>
+		<div class="card-body">
+			<form class="row row-cols-md-auto align-items-center">
+				<div class="col-12">
+					<label class="form-label">Email address</label>
+					<input name="to_user" type="email" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2"
+						placeholder="example@domain.com" value="{{notification.to_user}}" required>
+				</div>
+
+				<div class="col-12">
+					<label class="form-label">Slack webhook url</label>
+					<div class="input-group mb-2 mr-sm-2">
+
+						<input name="webhook_url" type="url" class="form-control" id="inlineFormInputGroupUsername2"
+							placeholder="https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX" value="{{notification.webhook_url}}" required>
+					</div>
+				</div>
+
+				<div class="col-12">
+					<label class="form-label"> &nbsp; &nbsp; &nbsp; </label>
+					<div class="input-group mb-2 mr-sm-2">
+
+						<button type="submit" class="btn btn-primary mb-2">Change</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</form>
+{% endif %}
+<!-- update ends -->
+		</div>
+
+	</div>
+</main>
+
+{% endblock %}

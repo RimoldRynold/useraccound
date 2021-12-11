@@ -12,6 +12,7 @@ from .decorators import unauthenticated_user, admin_only ,allowed_users
 from twilio.rest import Client
 from django.conf import settings
 
+
 from .forms import CustomUserCreationForm
 
 from .models import (
@@ -19,9 +20,10 @@ from .models import (
     Bot,
     LogData,
     Threshold,
+    Notification,
+    TwilioApi,
     User
 )
-
 
 
 
@@ -140,17 +142,23 @@ class DashboardView(View):
     @method_decorator(login_required(login_url='core:login'))
     @method_decorator(admin_only)
     def get(self, request):
-        client = Client(settings.ACCOUNT_API_KEY,settings.ACCOUNT_API_SECRET,settings.TWILIO_ACCOUNT_SID)
-        # balance = float(client.api.v2010.balance.fetch().balance)
-        balance = 35.5
-        currency = client.api.v2010.balance.fetch().currency
         thresholds = Threshold.objects.all().order_by('-value')
+        # thresholds = cron.thresholds
         if request.user.groups.all()[0].name == 'App Admin Group':
             group = True
+        if Notification.objects.all():
+            notification = Notification.objects.all()[0]
+        else:
+            notification = ''
+        if TwilioApi.objects.all() and TwilioApi.objects.all()[0].balance:
+            balance = TwilioApi.objects.all()[0].balance
+        else:
+            balance = 0
         context = {
             'balance':balance,
             'thresholds':thresholds,
-            'group':group
+            'group':group,
+            'notification' : notification
         }
         return render(request, self.template_name,context)
     
@@ -160,3 +168,50 @@ class ClientPageView(View):
     @method_decorator(allowed_users(allowed_roles=['Client Group']))
     def get(self, request):
         return render(request, self.template_name)
+    
+class Notifications(View):
+    template_name = 'core/forms-layouts.html'
+    @method_decorator(login_required(login_url='core:login'))
+    @method_decorator(admin_only)
+    def get(self,request):
+        if Notification.objects.all():
+            notification = Notification.objects.all()[0]
+        else:
+            notification = ''
+        if request.user.groups.all()[0].name == 'App Admin Group':
+            group = True
+        template_name = 'core/forms-layouts.html'
+        if TwilioApi.objects.all() and TwilioApi.objects.all()[0].balance:
+            balance = TwilioApi.objects.all()[0].balance
+        else:
+            balance = 0
+        
+        context = {
+            'notification': notification,
+            'group' : group,
+            'thresholds':Threshold.objects.all().order_by('-value'),
+            'balance':balance,
+        }
+        return render(request,self.template_name,context)
+    def post(self,request):
+        if Notification.objects.filter(webhook_url=request.POST['webhook_url']):
+            notification = Notification.objects.filter(webhook_url=request.POST['webhook_url']).update(to_user=request.POST['to_user'],webhook_url=request.POST['webhook_url'])
+            
+        else:
+            notification = Notification(to_user=request.POST['to_user'],webhook_url=request.POST['webhook_url'])
+            notification.save()
+        if request.user.groups.all()[0].name == 'App Admin Group':
+            group = True
+        if TwilioApi.objects.all() and TwilioApi.objects.all()[0].balance:
+            balance = TwilioApi.objects.all()[0].balance
+        else:
+            balance = 0
+        
+        context = {
+            'notification': Notification.objects.all()[0],
+            'group' : group,
+            'thresholds':Threshold.objects.all().order_by('-value'),
+            'balance':balance,
+        }
+        return render(request,self.template_name,context)
+        

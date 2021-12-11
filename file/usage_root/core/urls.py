@@ -14,6 +14,7 @@ urlpatterns = [
     path('login', LoginView.as_view(), name='login'),
     path('admin-dashboard', DashboardView.as_view(), name='dashboard'),
     path('', ClientPageView.as_view(), name='client'),
+    path('notification-settings', Notifications.as_view(), name='notification-settings'),
     
     
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

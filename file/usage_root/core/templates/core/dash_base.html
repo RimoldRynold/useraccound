@@ -66,12 +66,14 @@
                     </li> -->
                     <li class="sidebar-item active">
                         <a data-bs-target="#dashboards" class="sidebar-link">
-                            <i class="align-middle" data-feather="sliders"></i> 
+                            {% if group %}
+                            <i class="align-middle" data-feather="dollar-sign"></i> 
                             <!-- <i class="align-middle" data-feather=""></i>  -->
                             <span
+                            
                                 class="align-middle">Account Balance</span>
                                 <!-- table -->
-                                {% if group %}
+                                
                                 <table class="table mb-0">
                                     <thead>
                                         <tr>
@@ -319,9 +321,10 @@
                                     Profile</a>
 
                                 <!-- <div class="dropdown-divider"></div> -->
-
-
-                                <a class="dropdown-item" href="{% url 'core:logout' %}">Sign out</a>
+                                {% if group %}
+                                <a class="dropdown-item" href="{% url 'core:notification-settings' %}"><i class="align-middle me-1" data-feather="settings"></i>Notification Settings</a>
+                                {% endif %}
+                                <a class="dropdown-item" href="{% url 'core:logout' %}"><i class="align-middle me-1" data-feather="log-out"></i>Sign out</a>
                             </div>
                             {% endif %}
                         </li>

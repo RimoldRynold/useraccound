@@ -165,6 +165,8 @@ AUTH_USER_MODEL = 'core.User'
 # --------------test --------------------------
 # TWILIO_ACCOUNT_SID = 'AC2de62fbf27731a3be54704bcf8bfd1a9'
 # TWILIO_AUTH_TOKEN = '02391c0fb421e7be01935cd340fe7008'
+# ACCOUNT_API_KEY='SK826e5499011c896ef6535e0fc44aee7f'
+# ACCOUNT_API_SECRET='1kONYml6G1frv1uBZAc9nKzl7urb4iHu'
 # ---------------client -------------
 TWILIO_ACCOUNT_SID = 'AC7920b6d90fdc17921b35032c86c033dd'
 ACCOUNT_API_KEY = 'SK25cf2f8ffc8549e3cdcfc8b69d58d39a'
@@ -179,3 +181,7 @@ SUBACCOUNT_API_SECRET = 'lv4BsBPOx1f1T7C5mvLjiYsgvwa2oikg'
 CRONJOBS = [
     ('*/1 * * * *', 'cron.my_cron_job')
 ]
+
+#email notification
+EMAIL_SENDER = 'ajithsamplemail@gmail.com'
+SENDER_PASSWORD = "Ajith@2021"
